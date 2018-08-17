@@ -14,7 +14,9 @@ if emscripten then
 	-- avoid mixed content warning if trying to access wss resource from http page
 	-- https://github.com/britzl/defold-websocket/issues/8
 	-- https://github.com/kripken/emscripten/pull/6960
-	html5.run("Module['websocket'] = {url: window['location']['protocol'].replace('http', 'ws') + '//'};")
+	html5.run([[
+		Module['websocket'].url = window['location']['protocol'].replace('http', 'ws') + '//';
+	]])
 end
 
 local new = function()
